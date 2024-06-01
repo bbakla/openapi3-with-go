@@ -36,3 +36,7 @@ func (s Server) GetUser(c *gin.Context, userId int64) {
 	//TODO implement me
 	panic("implement me")
 }
+
+func (s Server) PutApiV1UsersUserId(c *gin.Context, userId int64) {
+	panic("implement me")
+}

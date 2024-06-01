@@ -1,4 +1,4 @@
-package strict_server
+package strictserver
 
 import (
 	"context"
@@ -31,5 +31,9 @@ func (StrictServer) DeleteUser(ctx context.Context, request DeleteUserRequestObj
 
 func (s StrictServer) GetUser(ctx context.Context, request GetUserRequestObject) (GetUserResponseObject, error) {
 	//TODO implement me
+	panic("implement me")
+}
+
+func (s StrictServer) PutApiV1UsersUserId(ctx context.Context, request PutApiV1UsersUserIdRequestObject) (PutApiV1UsersUserIdResponseObject, error) {
 	panic("implement me")
 }
