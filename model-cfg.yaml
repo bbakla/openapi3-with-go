@@ -1,0 +1,6 @@
+package: api
+output: api/model.gen.go
+generate:
+  embedded-spec: false
+  models: true
+  gin-server: false

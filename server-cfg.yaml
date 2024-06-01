@@ -1,0 +1,8 @@
+package: api
+output: api/server.gen.go
+generate:
+  embedded-spec: false
+  strict-server: false
+  models: false
+  #chi-server: true # compatible with net/http
+  gin-server: true

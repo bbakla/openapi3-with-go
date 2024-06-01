@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: User Application
+  description: User Application
+  version: 1.0.0
+
+tags:
+  - name: user
+
+paths:
+  /api/v1/users:
+    post:
+      tags:
+        - user
+      summary: creates a user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        201:
+          description: user created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+
+  /api/v1/users/{userId}:
+    get:
+      tags:
+        - user
+      summary: get user
+      operationId: getUser
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: return user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+        - user
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: update user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+    delete:
+      tags:
+        - user
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      summary: delete a user
+      operationId: deleteUser
+      responses:
+        204:
+          description: delete user
+
+
+components:
+  schemas:
+    CreateUser:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+
+    User:
+      description: saved user
+      allOf:
+        - $ref: '#/components/schemas/CreateUser'
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer
+              format: int64
+            createdAt:
+              type: string
+              format: 'date-time'
+            updatedAt:
+              type: string
+              format: 'date-time'
+
+
