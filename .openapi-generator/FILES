@@ -2,8 +2,8 @@ Dockerfile
 api/openapi.yaml
 go.mod
 main.go
-open-api-gin/README.md
-open-api-gin/api_user.go
-open-api-gin/model_create_user.go
-open-api-gin/model_user.go
-open-api-gin/routers.go
+open-oapi-codegen-gin_interface/README.md
+open-oapi-codegen-gin_interface/api_user.go
+open-oapi-codegen-gin_interface/model_create_user.go
+open-oapi-codegen-gin_interface/model_user.go
+open-oapi-codegen-gin_interface/routers.go

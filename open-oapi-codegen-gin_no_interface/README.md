@@ -1,4 +1,4 @@
-# Go API Server for openapigen_gin
+# Go API Server for openapigen_gin_no_interface
 
 User Application
 
@@ -13,7 +13,7 @@ To see how to make this your own, look here:
 [README](https://openapi-generator.tech)
 
 - API version: 1.0.0
-- Build date: 2024-06-02T16:34:03.557420+02:00[Europe/Berlin]
+- Build date: 2024-06-02T17:56:11.758607+02:00[Europe/Berlin]
 - Generator version: 7.6.0
 
 ### Running the server
@@ -26,12 +26,12 @@ go run main.go
 
 To run the server in a docker container
 ```
-docker build --network=host -t openapigen_gin .
+docker build --network=host -t openapigen_gin_no_interface .
 ```
 
 Once the image is built, just run
 ```
-docker run --rm -it openapigen_gin
+docker run --rm -it openapigen_gin_no_interface
 ```
 
 ### Known Issue

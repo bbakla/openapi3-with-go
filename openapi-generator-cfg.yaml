@@ -1,4 +1,4 @@
 outputAsLibrary: true
 interfaceOnly: true
-apiPath: open-api-gin
-packageName: openapigen_gin
+apiPath: open-oapi-codegen-gin_interface
+packageName: openapigen_gin_interface

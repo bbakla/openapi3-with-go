@@ -37,8 +37,8 @@
 It could be difficult to follow to command entering parameters in the command line. The configuration files can helps us with that
 1. Define a config file such as below. This is just an example. You can try all the possibilities of the configuration.
 ```yaml
-  package: api
-  output: api/server.gen.go
+  package: oapi-codegen
+  output: oapi-codegen/server.gen.go
   generate:
     embedded-spec: false
     strict-server: true
@@ -66,5 +66,9 @@ openapi-generator generate -g go-gin-server -o open-api -i todo-app.yaml
 ```
 
 It is also possible to define a config file not to simplify the command prompt. The list of command options can be found [here](https://openapi-generator.tech/docs/generators/go-gin-server/)
+The  command to execute the generation with config file is:
+```
+openapi-generator generate -c openapi-generator-cfg.yaml -i todo-app.yaml             
+```
 
 # Implementing the endpoints

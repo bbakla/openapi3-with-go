@@ -10,20 +10,20 @@
 package main
 
 import (
-	"github.com/bbakla/openapi3-with-go/api/openapigenonlyinterface"
-	openapigen_gin "github.com/bbakla/openapi3-with-go/open-api-gin"
 	"log"
+
 	// WARNING!
 	// Pass --git-repo-id and --git-user-id properties when generating the code
 	//
+	sw "github.com/GIT_USER_ID/GIT_REPO_ID/open-oapi-codegen-gin_interface"
 )
 
 func main() {
-	routes := openapigen_gin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
+	routes := sw.ApiHandleFunctions{}
 
 	log.Printf("Server started")
 
-	router := openapigen_gin.NewRouter(routes)
+	router := sw.NewRouter(routes)
 
 	log.Fatal(router.Run(":8080"))
 }

@@ -1,7 +1,7 @@
 package openapigenonlyinterface
 
 import (
-	openapigen_gin "github.com/bbakla/openapi3-with-go/open-api-gin"
+	openapigen_gin_interface "github.com/GIT_USER_ID/GIT_REPO_ID/open-oapi-codegen-gin_interface"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -15,9 +15,9 @@ func NewUserAPI() UserAPI {
 	return UserAPI{userService: NewUserService()}
 }
 
-// Put /api/v1/users/:userId
+// Put /oapi-codegen/v1/users/:userId
 func (api UserAPI) ApiV1UsersUserIdPut(c *gin.Context) {
-	var body openapigen_gin.User
+	var body openapigen_gin_interface.User
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.Status(http.StatusBadRequest)
 		c.Error(err)
@@ -29,10 +29,10 @@ func (api UserAPI) ApiV1UsersUserIdPut(c *gin.Context) {
 
 }
 
-// Post /api/v1/users
+// Post /oapi-codegen/v1/users
 // creates a user
 func (api UserAPI) CreateUser(c *gin.Context) {
-	var body openapigen_gin.CreateUser
+	var body openapigen_gin_interface.CreateUser
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.Status(http.StatusBadRequest)
 		c.Error(err)
@@ -44,7 +44,7 @@ func (api UserAPI) CreateUser(c *gin.Context) {
 	c.JSON(http.StatusCreated, user)
 }
 
-// Delete /api/v1/users/:userId
+// Delete /oapi-codegen/v1/users/:userId
 // delete a user
 func (api UserAPI) DeleteUser(c *gin.Context) {
 	userId := c.Param("userId")
@@ -55,7 +55,7 @@ func (api UserAPI) DeleteUser(c *gin.Context) {
 	c.JSON(http.StatusNoContent, err)
 }
 
-// Get /api/v1/users/:userId
+// Get /oapi-codegen/v1/users/:userId
 // get user
 func (api UserAPI) GetUser(c *gin.Context) {
 	userId := c.Param("userId")
