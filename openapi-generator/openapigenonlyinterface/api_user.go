@@ -1,7 +1,7 @@
 package openapigenonlyinterface
 
 import (
-	openapigen_gin_interface "github.com/GIT_USER_ID/GIT_REPO_ID/open-oapi-codegen-gin_interface"
+	openapigen_gin "github.com/bbakla/openapi3-with-go/open-oapi-codegen"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -17,7 +17,7 @@ func NewUserAPI() UserAPI {
 
 // Put /oapi-codegen/v1/users/:userId
 func (api UserAPI) ApiV1UsersUserIdPut(c *gin.Context) {
-	var body openapigen_gin_interface.User
+	var body openapigen_gin.User
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.Status(http.StatusBadRequest)
 		c.Error(err)
@@ -32,7 +32,7 @@ func (api UserAPI) ApiV1UsersUserIdPut(c *gin.Context) {
 // Post /oapi-codegen/v1/users
 // creates a user
 func (api UserAPI) CreateUser(c *gin.Context) {
-	var body openapigen_gin_interface.CreateUser
+	var body openapigen_gin.CreateUser
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.Status(http.StatusBadRequest)
 		c.Error(err)
