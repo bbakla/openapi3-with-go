@@ -167,3 +167,43 @@ log.Fatal(s.ListenAndServe())
 ```
 
 ## openapi-generator
+An interface is generated for each api group. We have only user group in our simple design. So we have only `api_user.go` generated
+for us.
+
+We have also a struct `ApiHandleFunctions` which takes the interface defined in our `api_user.go` file. 
+```go
+type ApiHandleFunctions struct {
+
+	// Routes for the UserAPI part of the API
+	UserAPI UserAPI
+}
+```
+
+Have a look now on `routers.go`. The endpoints are defined here with the function `getRoutes`, and it takes `ApiHandleFunctions`
+in the signature. Each endpoint call a function of `UserAPI` interface. I am not sure about the naming here though. It doesnt actually
+get the routes but more creates them.
+
+```go
+func getRoutes(handleFunctions ApiHandleFunctions)  []Route {} 
+```
+
+But wait! `getRoutes` is private! So who calls `getRoutes` function. Looks like we have another struct `Router` and a function
+`NewRouter` that creates a Router for use. Depending on your server generator choice, we get a router object. That router struct
+then creates the routes. Finally, we are ready to go!
+
+So all we have to do is:
+1. Implement `UserAPI`.
+2. Create `ApiHandleFunctions` struct
+3. Create our `Router` via `NewRouter`.
+
+The example code can be found [here](#)
+
+Our main function would be:
+
+```go
+	routes := openapigengin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
+	log.Printf("Server started")
+	router := openapigengin.NewRouter(routes)
+	log.Fatal(router.Run(":8080"))
+
+```
