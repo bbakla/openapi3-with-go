@@ -65,10 +65,15 @@ Lets generate it for `gin`:
 openapi-generator generate -g go-gin-server -o open-api -i todo-app.yaml
 ```
 
-It is also possible to define a config file not to simplify the command prompt. The list of command options can be found [here](https://openapi-generator.tech/docs/generators/go-gin-server/)
-The  command to execute the generation with config file is:
+It is also possible to define a config file to simplify the command prompt. The list of command options for gin server can be found [here](https://openapi-generator.tech/docs/generators/go-gin-server/)
+The  command to execute the generation with config file is. You can also see the command in `Makefile`
 ```
 openapi-generator generate -c openapi-generator-cfg.yaml -i todo-app.yaml             
 ```
+There are some catches with `openapi-generator` though:
+1. Config options differ based on the server generator. Check [here](https://openapi-generator.tech/docs/generators#server-generators) for 
+the config options of your server generator 
+2. I couldn't find the code that causes that but if you run the command with config file option, the generated `main.go` and `go.mod` files override
+your original files for `go-gin` server generator. It is also not possible to change it through config options. It can be frustrating so be careful.
 
 # Implementing the endpoints
