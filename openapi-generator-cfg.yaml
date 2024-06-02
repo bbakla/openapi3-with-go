@@ -1,0 +1,4 @@
+outputAsLibrary: true
+interfaceOnly: true
+apiPath: open-api-gin
+packageName: openapigen_gin

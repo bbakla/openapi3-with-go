@@ -57,7 +57,14 @@ free to try it
 We could also use OpenAPI Generator's CLI tool. You can see how to install it [here](https://openapi-generator.tech/docs/installation)
 After installing,  you run the command. The code will be generated in `open-api` directory. 
 ```
-openapi-generator generate -g go -o open-api -i todo-app.yaml
+openapi-generator generate -g go-server -o open-api -i todo-app.yaml
 ```
+You can also generate the code compatible with `echo` or `gin`. You can find more information [here](https://openapi-generator.tech/docs/generators#server-generators)
+Lets generate it for `gin`:
+```
+openapi-generator generate -g go-gin-server -o open-api -i todo-app.yaml
+```
+
+It is also possible to define a config file not to simplify the command prompt. The list of command options can be found [here](https://openapi-generator.tech/docs/generators/go-gin-server/)
 
 # Implementing the endpoints
