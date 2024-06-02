@@ -85,5 +85,85 @@ I tried to name all the possible package or directory names separately so that y
 # Implementing the endpoints
 So we have generated the code! How will we use them with our code than?
 ## Oapi-codegen
+### strict-server
+There are two ways to use generated code in our service.
+#### Using ServerInterfaceWrapper
+It generates an `ServerInterface` interface that includes handler functions for each endpoint. The function take the name
+from `operationId` field. Note that, I didnt give any `operationId`  to the `put` request and you can see that an automatic
+name `PutApiV1UsersUserId` is assigned to it, which is not super readable. So I would recommend giving a meaningful `operationId`.
+
+The struct `ServerInterfaceWrapper` contains `ServerInterface` as instance, and it also implements the `ServerInterface`. All the 
+handler functions of `ServerInterface` injected as instance variable are called by the receiver functions of `ServerInterfaceWrapper`
+
+All the endpoints are registered to the router by `RegisterHandlersWithOptions`. `RegisterHandlersWithOptions` calls the handler functions of 
+`ServerInterfaceWrapper` which calls another implementation of `ServerInterface`. 
+
+In this case all we have to do is to implement `ServerInterface` and create an `ServerInterfaceWrapper` with our implementation and call
+`RegisterHandlersWithOptions`.
+
+#### Using NewStrictHandler
+There is another struct `strictHandler`, which also implements `ServerInterface`. So we have another struct to register to  `RegisterHandlersWithOptions`.
+The declaration of `strictHandler` is below.
+
+```go
+type strictHandler struct {
+	ssi         StrictServerInterface
+	middlewares []StrictMiddlewareFunc
+}
+```
+Since it already implements `ServerInterface` we can directly use it, right?! There is even `NewStrictHandler` to generate it for us.
+The generated code is below.
+```
+func NewStrictHandler(ssi StrictServerInterface, middlewares []StrictMiddlewareFunc) ServerInterface {
+	return &strictHandler{ssi: ssi, middlewares: middlewares}
+}
+```
+
+What is than `StrictServerInterface`? It is another interface called by `strictHandler`. `strictHandler` is actually another wrapper around
+`ServerInterface`. It takes the request body and/or necessary parameters declared in the open-api yaml file. The functions of `StrictServerInterface`
+are actually defined by one that. As you look carefully, you realize that `StrictServerInterface` and `ServerInterface` functions are not the same.
+
+What do we need `StrictServerInterface`? It helps us with the type safety as it also creates request and response objects automatically for us.
+It also saves us from duplicate code retrieving request body and parameters.
+
+A sample implementation of `StrictServerInterface` can be found [here](#).
+
+The code in our `main.go` would be 
+```go
+    server := strictserver.NewServer()
+
+	router := gin.Default()
+	sh := strictserver.NewStrictHandler(server, nil)
+	strictserver.RegisterHandlers(router, sh)
+	s := &http.Server{
+		Handler: router,
+		Addr:    "0.0.0.0:8080",
+	}
+
+	log.Fatal(s.ListenAndServe())*/
+```
+
+
+### non-strict-server
+Again, we have an interface `ServerInterface` and a struct `ServerInterfaceWrapper` contains a `ServerInterface`. 
+The router functions call wrapper handling functions and wrapper handling functions call the `ServerInterface` handlers and middleware functions.
+So we have to implement `ServerInterface` and inject it into `ServerInterfaceWrapper` with our middleware functions if there is any.
+We can then call `RegisterHandlers` or `RegisterHandlersWithOptions` function without wrapper. Alternatively we can directly call the register
+functions with our implementation without the wrapper. In this case, we cannot execute and middleware functions.
+Example source code can be found [here](#)
+
+Our main function for the simplest use case would be:
+```go
+server := not_strict_server.NewServer()
+
+router := gin.Default()
+not_strict_server.RegisterHandlers(router, server)
+s := &http.Server{
+Handler: router,
+Addr:    "0.0.0.0:8080",
+}
+
+log.Fatal(s.ListenAndServe())
+```
 
 ## openapi-generator

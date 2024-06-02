@@ -29,6 +29,7 @@ func main() {
 	*/
 
 	// using  oapi-codegen strict server version
+
 	/*server := strictserver.NewServer()
 
 	router := gin.Default()
