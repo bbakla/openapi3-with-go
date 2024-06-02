@@ -1,7 +1,7 @@
 package main
 
 import (
-	openapigen_gin "github.com/bbakla/openapi3-with-go/open-oapi-codegen"
+	openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/gin-server-gen/oapi-go-codegen"
 	"github.com/bbakla/openapi3-with-go/openapi-generator/openapigenonlyinterface"
 	"log"
 )
@@ -9,9 +9,9 @@ import (
 func main() {
 
 	// Using openapi-generator generated code
-	routes := openapigen_gin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
+	routes := openapigengin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
 	log.Printf("Server started")
-	router := openapigen_gin.NewRouter(routes)
+	router := openapigengin.NewRouter(routes)
 	log.Fatal(router.Run(":8080"))
 
 	// using oapi-codegen not strict server version

@@ -1,4 +1,3 @@
-
 interfaceOnly: true
-apiPath: open-oapi-codegen
+apiPath: oapi-go-codegen
 packageName: openapigen_gin

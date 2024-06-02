@@ -1,7 +1,7 @@
 package openapigenonlyinterface
 
 import (
-	openapigen_gin "github.com/bbakla/openapi3-with-go/open-oapi-codegen"
+	openapigen_gin "github.com/bbakla/openapi3-with-go/openapi-generator/gin-server-gen/oapi-go-codegen"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"

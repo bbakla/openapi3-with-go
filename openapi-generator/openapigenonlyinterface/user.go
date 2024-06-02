@@ -2,8 +2,7 @@ package openapigenonlyinterface
 
 import (
 	"errors"
-	openapigen_gin "github.com/bbakla/openapi3-with-go/open-oapi-codegen"
-
+	openapigen_gin "github.com/bbakla/openapi3-with-go/openapi-generator/gin-server-gen/oapi-go-codegen"
 	"sync"
 	"time"
 )

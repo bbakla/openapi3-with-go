@@ -12,12 +12,14 @@
 5. The code is now under `api` directory generated. You will see an interface `ServerInterface` which you will implement.
 
 ## Features
-1. *Use 3th party library*: You can use several libraries to generate handlers of server. To use `gin`:
+### Use 3th party frameworks
+You can use several libraries to generate handlers of server. To use `gin`:
 ```go
     oapi-codegen -package=api  -generate gin todo-app.yaml > api/todo.gen.go 
 ```
+### Generate code separately
 
-2. *Improve readability*: You can generate the code in different files to increase separately:
+You can generate the code in different files separately to increase readability:
 ```
      oapi-codegen -package=api  -generate gin todo-app.yaml > api/todo-server.gen.go   
 ```
@@ -33,7 +35,7 @@
 ```
     oapi-codegen -package=api  -generate spec todo-app.yaml > api/todo-specs.gen.go  
 ```
-# Using config file
+### Using config file
 It could be difficult to follow to command entering parameters in the command line. The configuration files can helps us with that
 1. Define a config file such as below. This is just an example. You can try all the possibilities of the configuration.
 ```yaml
@@ -53,18 +55,21 @@ It could be difficult to follow to command entering parameters in the command li
 We now generated the code for server side. We can also generate the models. I created the config file also for it. Feel 
 free to try it
 
-# Using openapi-generator
+# openapi-generator
 We could also use OpenAPI Generator's CLI tool. You can see how to install it [here](https://openapi-generator.tech/docs/installation)
-After installing,  you run the command. The code will be generated in `open-api` directory. 
+After installing,  you run the command. The code will be generated in `open-api` directory. You see that the generator will 
+create each model and the api separately. It is quite easy to follow.
 ```
 openapi-generator generate -g go-server -o open-api -i todo-app.yaml
 ```
+## Features
+### Use 3th party frameworks
 You can also generate the code compatible with `echo` or `gin`. You can find more information [here](https://openapi-generator.tech/docs/generators#server-generators)
 Lets generate it for `gin`:
 ```
 openapi-generator generate -g go-gin-server -o open-api -i todo-app.yaml
 ```
-
+### Use config file
 It is also possible to define a config file to simplify the command prompt. The list of command options for gin server can be found [here](https://openapi-generator.tech/docs/generators/go-gin-server/)
 The  command to execute the generation with config file is. You can also see the command in `Makefile`
 ```
@@ -73,7 +78,12 @@ openapi-generator generate -c openapi-generator-cfg.yaml -i todo-app.yaml
 There are some catches with `openapi-generator` though:
 1. Config options differ based on the server generator. Check [here](https://openapi-generator.tech/docs/generators#server-generators) for 
 the config options of your server generator 
-2. I couldn't find the code that causes that but if you run the command with config file option, the generated `main.go` and `go.mod` files override
-your original files for `go-gin` server generator. It is also not possible to change it through config options. It can be frustrating so be careful.
+2. Generated `main.go` and `go.mod` files override your original `main.go` and `go.mod` files, unless you define the
+output directory with `-o` parameter. It is also not possible to change it through config options. It can be frustrating so be careful.
+I tried to name all the possible package or directory names separately so that you can understand the configuration better.
 
 # Implementing the endpoints
+So we have generated the code! How will we use them with our code than?
+## Oapi-codegen
+
+## openapi-generator

@@ -1,9 +1,0 @@
-Dockerfile
-api/openapi.yaml
-go.mod
-main.go
-open-oapi-codegen/README.md
-open-oapi-codegen/api_user.go
-open-oapi-codegen/model_create_user.go
-open-oapi-codegen/model_user.go
-open-oapi-codegen/routers.go
