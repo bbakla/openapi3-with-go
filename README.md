@@ -205,5 +205,15 @@ Our main function would be:
 	log.Printf("Server started")
 	router := openapigengin.NewRouter(routes)
 	log.Fatal(router.Run(":8080"))
-
 ```
+
+# Show Swagger UI
+To be able to call swagger UI, we need an endpoint.
+1. TODO: Create endpoint
+2. We have now our endpoint but what will that endpoint return??
+One way is to upload our spec via open api webpage, so we can host it online. Once we upload it, we get a URL for that spec. Our endpoint
+can call it and return the response, but you may not prefer to expose your spec to the outer world.
+Another way is to host Swagger distribution yourself. How do we do it?
+   1. Download the [latest release](https://github.com/swagger-api/swagger-ui/releases)
+   2. Unzip the file and you will see the `dist` folder. Move it to your project folder
+   3. 
