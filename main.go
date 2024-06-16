@@ -1,17 +1,16 @@
 package main
 
 import (
-	not_strict_server "github.com/bbakla/openapi3-with-go/oapi-codegen/not-strict-server"
-	openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/gin-server-gen/oapi-go-codegen"
+	openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/go-gen-gin/oapi_generator_userapi"
+	//openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/gin-server-gen/oapi-go-codegen"
 	"github.com/bbakla/openapi3-with-go/openapi-generator/openapigenonlyinterface"
-	"github.com/gin-gonic/gin"
 	"log"
-	"net/http"
 )
 
 func main() {
 
 	// Using openapi-generator generated code
+	//routes := ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
 	routes := openapigengin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
 	log.Printf("Server started")
 	router := openapigengin.NewRouter(routes)
@@ -19,7 +18,7 @@ func main() {
 
 	// using oapi-codegen not strict server version
 
-	server := not_strict_server.NewServer()
+	/*server := not_strict_server.NewServer()
 
 	router := gin.Default()
 	not_strict_server.RegisterHandlers(router, server)
@@ -28,7 +27,7 @@ func main() {
 		Addr:    "0.0.0.0:8080",
 	}
 
-	log.Fatal(s.ListenAndServe())
+	log.Fatal(s.ListenAndServe())*/
 
 	// using  oapi-codegen strict server version
 

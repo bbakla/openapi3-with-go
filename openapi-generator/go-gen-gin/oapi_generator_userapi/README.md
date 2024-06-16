@@ -1,4 +1,4 @@
-# Go API Server for openapigen_gin
+# Go API Server for oapi_generator_userapi
 
 User Application
 
@@ -13,7 +13,7 @@ To see how to make this your own, look here:
 [README](https://openapi-generator.tech)
 
 - API version: 1.0.0
-- Build date: 2024-06-02T21:21:11.762819+02:00[Europe/Berlin]
+- Build date: 2024-06-16T14:37:33.446914+02:00[Europe/Berlin]
 - Generator version: 7.6.0
 
 ### Running the server
@@ -26,12 +26,12 @@ go run main.go
 
 To run the server in a docker container
 ```
-docker build --network=host -t openapigen_gin .
+docker build --network=host -t oapi_generator_userapi .
 ```
 
 Once the image is built, just run
 ```
-docker run --rm -it openapigen_gin
+docker run --rm -it oapi_generator_userapi
 ```
 
 ### Known Issue

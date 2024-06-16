@@ -15,7 +15,7 @@ import (
 	// WARNING!
 	// Pass --git-repo-id and --git-user-id properties when generating the code
 	//
-	sw "github.com/bbakla/open-oapi-codegen/oapi-go-codegen"
+	sw "github.com/bbakla/open-oapi-codegen/oapi_generator_userapi"
 )
 
 func main() {
