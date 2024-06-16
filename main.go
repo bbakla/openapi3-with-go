@@ -2,6 +2,7 @@ package main
 
 import (
 	openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/go-gen-gin/oapi_generator_userapi"
+	//openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/go-gen-gin/oapi_generator_userapi"
 	//openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/gin-server-gen/oapi-go-codegen"
 	"github.com/bbakla/openapi3-with-go/openapi-generator/openapigenonlyinterface"
 	"log"
