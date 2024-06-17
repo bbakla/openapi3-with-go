@@ -1,3 +1,4 @@
+In this article, I will try to explain gow 
 # Oapi-codegen
 > Github repo: https://github.com/deepmap/oapi-codegen
 
@@ -6,7 +7,7 @@
 3. Create the directory in which you will put the generated code. This directory is `api` in the examples below.
 3. Run the command below to generate the code
 ```go
-    oapi-codegen -package=api -generate "types,server,spec" todo-app.yaml > api/todo.gen.go 
+    oapi-codegen -package=api -generate "types,server,spec" user-app.yaml > api/todo.gen.go 
 ```
 4. There may be some dependencies you may need as the generated code uses them
 5. The code is now under `api` directory generated. You will see an interface `ServerInterface` which you will implement.
@@ -15,25 +16,25 @@
 ### Use 3th party frameworks
 You can use several libraries to generate handlers of server. To use `gin`:
 ```go
-    oapi-codegen -package=api  -generate gin todo-app.yaml > api/todo.gen.go 
+    oapi-codegen -package=api  -generate gin user-app.yaml > api/todo.gen.go 
 ```
 ### Generate code separately
 
 You can generate the code in different files separately to increase readability:
 ```
-     oapi-codegen -package=api  -generate gin todo-app.yaml > api/todo-server.gen.go   
+     oapi-codegen -package=api  -generate gin user-app.yaml > api/todo-server.gen.go   
 ```
 
 ```
-    oapi-codegen -package=api  -generate types todo-app.yaml > api/todo-type.gen.go     
+    oapi-codegen -package=api  -generate types user-app.yaml > api/todo-type.gen.go     
 ```
 
 ```
-    oapi-codegen -package=api  -generate client todo-app.yaml > api/todo-client.gen.go
+    oapi-codegen -package=api  -generate client user-app.yaml > api/todo-client.gen.go
 ```
 
 ```
-    oapi-codegen -package=api  -generate spec todo-app.yaml > api/todo-specs.gen.go  
+    oapi-codegen -package=api  -generate spec user-app.yaml > api/todo-specs.gen.go  
 ```
 ### Using config file
 It could be difficult to follow to command entering parameters in the command line. The configuration files can helps us with that
@@ -49,7 +50,7 @@ It could be difficult to follow to command entering parameters in the command li
 ```
 2. Run the command below:
 ```
-    oapi-codegen -package=api --config=server-cfg.yaml  todo-app.yaml
+    oapi-codegen -package=api --config=server-cfg.yaml  user-app.yaml
 ```
 
 We now generated the code for server side. We can also generate the models. I created the config file also for it. Feel 
@@ -60,20 +61,20 @@ We could also use OpenAPI Generator's CLI tool. You can see how to install it [h
 After installing,  you run the command. The code will be generated in `open-api` directory. You see that the generator will 
 create each model and the api separately. It is quite easy to follow.
 ```
-openapi-generator generate -g go-server -o open-api -i todo-app.yaml
+openapi-generator generate -g go-server -o open-api -i user-app.yaml
 ```
 ## Features
 ### Use 3th party frameworks
 You can also generate the code compatible with `echo` or `gin`. You can find more information [here](https://openapi-generator.tech/docs/generators#server-generators)
 Lets generate it for `gin`:
 ```
-openapi-generator generate -g go-gin-server -o open-api -i todo-app.yaml
+openapi-generator generate -g go-gin-server -o open-api -i user-app.yaml
 ```
 ### Use config file
 It is also possible to define a config file to simplify the command prompt. The list of command options for gin server can be found [here](https://openapi-generator.tech/docs/generators/go-gin-server/)
 The  command to execute the generation with config file is. You can also see the command in `Makefile`
 ```
-openapi-generator generate -c openapi-generator-cfg.yaml -i todo-app.yaml             
+openapi-generator generate -c openapi-generator-cfg.yaml -i user-app.yaml             
 ```
 There are some catches with `openapi-generator` though:
 1. Config options differ based on the server generator. Check [here](https://openapi-generator.tech/docs/generators#server-generators) for 
@@ -208,22 +209,19 @@ Our main function would be:
 ```
 
 # Show Swagger UI
-I will show two ways to display Swagger UI via an endpoint
-
-## Self-hosting Release
 We will host the swagger release in our project and serve the filesystem via an endpoint. Lets start:
 1. Download the [latest release](https://github.com/swagger-api/swagger-ui/releases)
 2. Unzip the file and you will see the `dist` folder. Copy it to your project folder and rename it `swagger-ui`. Sure, you dont need to rename it.
 3. Copy your api spec under `swagger-ui` folder and modify the `url` parameter in `swagger-initializer.js` pointing your local open api spec.
-4. Create endpoint to call the swagger ui
+4. Create endpoint to call the swagger ui. Note that `go:embed` helps us to embed the content of `swagger-ui` into the exe file. 
 ```go
     //go:embed swagger-ui
-    var content embed.FS
+    var swaggerContent embed.FS
 
     func main() {
 		
 		// Define the router and other paths
-        fsys, _ := fs.Sub(content, "swagger-ui")
+        fsys, _ := fs.Sub(swaggerContent, "swagger-ui")
         router.StaticFS("/swagger", http.FS(fsys))
 }
 ```

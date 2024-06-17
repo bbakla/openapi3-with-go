@@ -4,23 +4,30 @@ import (
 	"embed"
 	not_strict_server "github.com/bbakla/openapi3-with-go/oapi-codegen/not-strict-server"
 	"github.com/bbakla/openapi3-with-go/oapi-codegen/strictserver"
+	openapigengin "github.com/bbakla/openoapi-code-generator/oapi_generator_userapi"
 	"github.com/gin-gonic/gin"
 	"io/fs"
-
-	//openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/generated/oapi_generator_userapi"
-	openapigengin "github.com/bbakla/openoapi-code-generator/oapi_generator_userapi"
 	"net/http"
 
-	//openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/go-gen-gin/oapi_generator_userapi"
-	//openapigengin "github.com/bbakla/openapi3-with-go/openapi-generator/gin-server-gen/oapi-go-codegen"
 	"github.com/bbakla/openapi3-with-go/openapi-generator/openapigenonlyinterface"
 	"log"
 )
 
 //go:embed swagger-ui
-var content embed.FS
+var swaggerContent embed.FS
 
 func main() {
+
+	/*	http.Handle("/api1/docs/", v5emb.New(
+			"Petstore",
+			"https://petstore3.swagger.io/api/v3/openapi.json",
+			"/api1/docs/",
+		))
+
+
+
+		println("docs at http://localhost:8080/api1/docs/")
+		_ = http.ListenAndServe("localhost:8080", http.DefaultServeMux)*/
 
 	openpiGenerator()
 
@@ -29,13 +36,27 @@ func main() {
 	//oapiCodegenStrict()
 }
 
+// Using openapi-generator generated code
+func openpiGenerator() {
+
+	routes := openapigengin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
+	log.Printf("Server started")
+	router := openapigengin.NewRouter(routes)
+
+	// add self hosted swagger ui
+	fsys, _ := fs.Sub(swaggerContent, "swagger-ui")
+	router.StaticFS("/swagger", http.FS(fsys))
+
+	log.Fatal(router.Run(":8080"))
+}
+
 // using  oapi-codegen strict server version
 func oapiCodegenStrict() {
 	server := strictserver.NewServer()
 
 	router := gin.Default()
-	// add swagger ui
-	fsys, _ := fs.Sub(content, "swagger-ui")
+	// add self hosted swagger ui
+	fsys, _ := fs.Sub(swaggerContent, "swagger-ui")
 	router.StaticFS("/swagger", http.FS(fsys))
 
 	sh := strictserver.NewStrictHandler(server, nil)
@@ -55,7 +76,7 @@ func oapicodegenNonStrict() {
 
 	router := gin.Default()
 	// add swagger ui
-	fsys, _ := fs.Sub(content, "swagger-ui")
+	fsys, _ := fs.Sub(swaggerContent, "swagger-ui")
 	router.StaticFS("/swagger", http.FS(fsys))
 
 	not_strict_server.RegisterHandlers(router, server)
@@ -65,18 +86,4 @@ func oapicodegenNonStrict() {
 	}
 
 	log.Fatal(s.ListenAndServe())
-}
-
-// Using openapi-generator generated code
-func openpiGenerator() {
-
-	routes := openapigengin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
-	log.Printf("Server started")
-	router := openapigengin.NewRouter(routes)
-
-	// add swagger-ui
-	fsys, _ := fs.Sub(content, "swagger-ui")
-	router.StaticFS("/swagger", http.FS(fsys))
-
-	log.Fatal(router.Run(":8080"))
 }
