@@ -1,4 +1,4 @@
-package not_strict_server
+package non_strict_server
 
 import (
 	"errors"

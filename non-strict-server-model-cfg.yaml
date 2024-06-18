@@ -1,0 +1,6 @@
+package: non_strict_server
+output: oapi-codegen/non-strict-server/model.gen.go
+generate:
+  embedded-spec: false
+  models: true
+  gin-server: false

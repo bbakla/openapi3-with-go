@@ -1,0 +1,8 @@
+package: non_strict_server
+output: oapi-codegen/non-strict-server/server.gen.go
+generate:
+  embedded-spec: false
+  strict-server: false
+  models: false
+  #chi-server: true # compatible with net/http
+  gin-server: true

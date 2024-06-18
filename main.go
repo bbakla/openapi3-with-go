@@ -2,7 +2,7 @@ package main
 
 import (
 	"embed"
-	not_strict_server "github.com/bbakla/openapi3-with-go/oapi-codegen/not-strict-server"
+	not_strict_server "github.com/bbakla/openapi3-with-go/oapi-codegen/non-strict-server"
 	strict_server "github.com/bbakla/openapi3-with-go/oapi-codegen/strict-server"
 	openapigengin "github.com/bbakla/openoapi-code-generator/oapi_generator_userapi"
 	"github.com/gin-gonic/gin"
@@ -18,11 +18,11 @@ var swaggerContent embed.FS
 
 func main() {
 
-	openpiGenerator()
+	//openpiGenerator()
 
 	//oapicodegenNonStrict()
 
-	//oapiCodegenStrict()
+	oapiCodegenStrict()
 }
 
 // Using openapi-generator generated code

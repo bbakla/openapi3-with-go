@@ -1,6 +1,0 @@
-package: oapi-codegen
-output: oapi-codegen/model.gen.go
-generate:
-  embedded-spec: false
-  models: true
-  gin-server: false

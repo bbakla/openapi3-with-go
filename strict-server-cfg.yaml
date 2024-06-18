@@ -1,8 +1,8 @@
-package: oapi-codegen
-output: oapi-codegen/server.gen.go
+package: strict_server
+output: oapi-codegen/strict-server/server.gen.go
 generate:
   embedded-spec: false
-  strict-server: false
+  strict-server: true
   models: false
   #chi-server: true # compatible with net/http
   gin-server: true
