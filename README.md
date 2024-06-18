@@ -1,4 +1,6 @@
-In this article, I will try to explain gow 
+This is the repo that I created for this [article]()
+It demonstrates how to generate boilerplate code in Go using open-api 3.
+
 # Oapi-codegen
 > Github repo: https://github.com/deepmap/oapi-codegen
 
