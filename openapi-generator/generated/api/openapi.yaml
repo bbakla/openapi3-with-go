@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   description: User Application
   title: User Application
@@ -103,7 +103,6 @@ components:
           type: string
         email:
           type: string
-      type: object
     User:
       allOf:
       - $ref: '#/components/schemas/CreateUser'
@@ -119,7 +118,6 @@ components:
             type: string
         required:
         - id
-        type: object
       description: saved user
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
