@@ -18,17 +18,6 @@ var swaggerContent embed.FS
 
 func main() {
 
-	/*	http.Handle("/api1/docs/", v5emb.New(
-			"Petstore",
-			"https://petstore3.swagger.io/api/v3/openapi.json",
-			"/api1/docs/",
-		))
-
-
-
-		println("docs at http://localhost:8080/api1/docs/")
-		_ = http.ListenAndServe("localhost:8080", http.DefaultServeMux)*/
-
 	openpiGenerator()
 
 	//oapicodegenNonStrict()
@@ -40,7 +29,7 @@ func main() {
 func openpiGenerator() {
 
 	routes := openapigengin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
-	log.Printf("Server started")
+	log.Printf("NonStrictServer started")
 	router := openapigengin.NewRouter(routes)
 
 	addSwaggerEndpoint(router)

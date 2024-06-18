@@ -5,15 +5,15 @@ import (
 	"net/http"
 )
 
-type Server struct {
+type NonStrictServer struct {
 	userService *UserService
 }
 
-func NewServer() Server {
-	return Server{userService: NewUserService()}
+func NewServer() NonStrictServer {
+	return NonStrictServer{userService: NewUserService()}
 }
 
-func (s Server) CreateUser(ctx *gin.Context) {
+func (s NonStrictServer) CreateUser(ctx *gin.Context) {
 
 	var body CreateUser
 	if err := ctx.ShouldBindJSON(&body); err != nil {
@@ -27,7 +27,7 @@ func (s Server) CreateUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, user)
 }
 
-func (s Server) DeleteUser(c *gin.Context, userId int64) {
+func (s NonStrictServer) DeleteUser(c *gin.Context, userId int64) {
 	err := s.userService.DeleteUser(userId)
 	if err != nil {
 		return
@@ -36,13 +36,13 @@ func (s Server) DeleteUser(c *gin.Context, userId int64) {
 	c.JSON(http.StatusNoContent, err)
 }
 
-func (s Server) GetUser(c *gin.Context, userId int64) {
+func (s NonStrictServer) GetUser(c *gin.Context, userId int64) {
 	user, _ := s.userService.GetUser(userId)
 
 	c.JSON(http.StatusOK, user)
 }
 
-func (s Server) PutApiV1UsersUserId(ctx *gin.Context, userId int64) {
+func (s NonStrictServer) PutApiV1UsersUserId(ctx *gin.Context, userId int64) {
 	var body User
 	if err := ctx.ShouldBindJSON(&body); err != nil {
 		ctx.Status(http.StatusBadRequest)
