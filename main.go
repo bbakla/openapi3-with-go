@@ -3,7 +3,6 @@ package main
 import (
 	"embed"
 	not_strict_server "github.com/bbakla/openapi3-with-go/oapi-codegen/not-strict-server"
-	"github.com/bbakla/openapi3-with-go/oapi-codegen/strict-server"
 	openapigengin "github.com/bbakla/openoapi-code-generator/oapi_generator_userapi"
 	"github.com/gin-gonic/gin"
 	"io/fs"
@@ -39,13 +38,13 @@ func openpiGenerator() {
 
 // using  oapi-codegen strict server version
 func oapiCodegenStrict() {
-	server := strictserver.NewServer()
+	server := strict_server.NewServer()
 
 	router := gin.Default()
 	addSwaggerEndpoint(router)
 
-	sh := strictserver.NewStrictHandler(server, nil)
-	strictserver.RegisterHandlers(router, sh)
+	sh := strict_server.NewStrictHandler(server, nil)
+	strict_server.RegisterHandlers(router, sh)
 	s := &http.Server{
 		Handler: router,
 		Addr:    "0.0.0.0:8080",

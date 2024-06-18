@@ -1,4 +1,4 @@
-package strictserver
+package strict_server
 
 import (
 	"context"
