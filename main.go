@@ -29,7 +29,7 @@ func main() {
 func openpiGenerator() {
 
 	routes := openapigengin.ApiHandleFunctions{UserAPI: openapigenonlyinterface.NewUserAPI()}
-	log.Printf("NonStrictServer started")
+	log.Printf("application with openpiGenerator boilder code started")
 	router := openapigengin.NewRouter(routes)
 
 	addSwaggerEndpoint(router)
