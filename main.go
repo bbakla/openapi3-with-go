@@ -43,9 +43,7 @@ func openpiGenerator() {
 	log.Printf("Server started")
 	router := openapigengin.NewRouter(routes)
 
-	// add self hosted swagger ui
-	fsys, _ := fs.Sub(swaggerContent, "swagger-ui")
-	router.StaticFS("/swagger", http.FS(fsys))
+	addSwaggerEndpoint(router)
 
 	log.Fatal(router.Run(":8080"))
 }
@@ -55,9 +53,7 @@ func oapiCodegenStrict() {
 	server := strictserver.NewServer()
 
 	router := gin.Default()
-	// add self hosted swagger ui
-	fsys, _ := fs.Sub(swaggerContent, "swagger-ui")
-	router.StaticFS("/swagger", http.FS(fsys))
+	addSwaggerEndpoint(router)
 
 	sh := strictserver.NewStrictHandler(server, nil)
 	strictserver.RegisterHandlers(router, sh)
@@ -75,9 +71,7 @@ func oapicodegenNonStrict() {
 	server := not_strict_server.NewServer()
 
 	router := gin.Default()
-	// add swagger ui
-	fsys, _ := fs.Sub(swaggerContent, "swagger-ui")
-	router.StaticFS("/swagger", http.FS(fsys))
+	addSwaggerEndpoint(router)
 
 	not_strict_server.RegisterHandlers(router, server)
 	s := &http.Server{
@@ -86,4 +80,10 @@ func oapicodegenNonStrict() {
 	}
 
 	log.Fatal(s.ListenAndServe())
+}
+
+func addSwaggerEndpoint(router *gin.Engine) {
+	// add swagger ui
+	fsys, _ := fs.Sub(swaggerContent, "swagger-ui")
+	router.StaticFS("/swagger", http.FS(fsys))
 }
