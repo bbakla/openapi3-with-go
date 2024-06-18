@@ -3,7 +3,7 @@ package main
 import (
 	"embed"
 	not_strict_server "github.com/bbakla/openapi3-with-go/oapi-codegen/not-strict-server"
-	"github.com/bbakla/openapi3-with-go/oapi-codegen/strictserver"
+	"github.com/bbakla/openapi3-with-go/oapi-codegen/strict-server"
 	openapigengin "github.com/bbakla/openoapi-code-generator/oapi_generator_userapi"
 	"github.com/gin-gonic/gin"
 	"io/fs"
