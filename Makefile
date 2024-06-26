@@ -13,4 +13,4 @@ oapi-codegen-non-strict-server:
 openapi-generator:
 	openapi-generator generate --git-host github.com --git-repo-id  openoapi-code-generator --git-user-id bbakla -g go-gin-server -c openapi-generator-cfg.yaml -o openapi-generator/generated -i user-app.yaml
 
-.PHONY: oapi-codegen-model oapi-codegen-server openapi-generator
+.PHONY: oapi-codegen-strict-server-model oapi-codegen-strict-server oapi-codegen-non-strict-server-model oapi-codegen-non-strict-server openapi-generator
