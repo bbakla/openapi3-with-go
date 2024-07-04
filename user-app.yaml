@@ -4,6 +4,20 @@ info:
   description: User Application
   version: 1.0.0
 
+#security:
+#  - BasicAuth: []
+#  - BearerAuth: []
+#  - APIKeyAuth: []
+#  - OAuth2:
+#      - read
+#      - write
+#      - admin
+#  - OpenID:
+#      - read
+#      - write
+#      - admin
+
+
 tags:
   - name: user
 
@@ -89,6 +103,33 @@ paths:
 
 
 components:
+#  securitySchemes:
+#    BasicAuth:
+#      type: http
+#      scheme: basic
+#    BearerAuth:
+#      type: http
+#      scheme: bearer
+#      bearerFormat: JWT
+#    APIKeyAuth:
+#      type: apiKey
+#      in: header
+#      name: Y-API-KEY
+#    OAuth2:
+#      type: oauth2
+#      flows:
+#        authorizationCode:
+#          authorizationUrl: https://example.com/authorize
+#          tokenUrl: http:/example.com/token
+#          scopes:
+#            write: write
+#            read: read
+#            admin: admin
+#    OpenID:
+#      type: openIdConnect
+#      openIdConnectUrl: https://lopenIdConnect.com
+
+
   schemas:
     CreateUser:
       type: object
